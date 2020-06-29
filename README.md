@@ -1,53 +1,47 @@
-![](https://raw.githubusercontent.com/jagracey/RegEx-DoS/master/resources/Banner.jpg)
+![](resources/Banner.jpg)
 # :cop: :punch: RegEx Denial of Service (ReDoS) Scanner
 ### Helping you find Regular Expressions susceptible to Denial of Service Attacks.
 *Please read the [contribution guidelines](CONTRIBUTING.md) before contributing.*
 
-<br><br>
-
 **A screenshot of ReDoS scanning in action.**
-![](https://raw.githubusercontent.com/jagracey/RegEx-DoS/master/resources/screenshot.png)
-
+![](resources/screenshot.png)
 
 # What is Regular Expression Denial of Service?
 [Wikipedia](https://en.wikipedia.org/wiki/ReDoS) and [OSWAP](https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS) have decent explainations. Basically certain RegExes can take a long time for certain inputs. Here's a real example.
 
 ```javascript
->   console.time('benchmark');
-    /^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaa');
-    console.timeEnd('benchmark');
-< benchmark: 0.060ms
+console.time('benchmark');
+/^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaa');
+console.timeEnd('benchmark');
+benchmark: 0.060ms
 
->   console.time('benchmark');
-    /^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    console.timeEnd('benchmark');
-< benchmark: 308.656ms
+console.time('benchmark');
+/^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+console.timeEnd('benchmark');
+benchmark: 308.656ms
 
->   console.time('benchmark');
-    /^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    console.timeEnd('benchmark');
-< benchmark: 3179.829ms
+console.time('benchmark');
+/^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+console.timeEnd('benchmark');
+benchmark: 3179.829ms
 
+console.time('benchmark');
+/^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+console.timeEnd('benchmark');
+benchmark: 22159.769ms  // 22 seconds
 
->   console.time('benchmark');
-    /^(([a-z])+.)+[A-Z]([a-z])+$/.test('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    console.timeEnd('benchmark');
-< benchmark: 22159.769ms  // 22 seconds
-
->   // You can guess what would happen if you test the RegEx with 100 repeating characters.
-    console.time('benchmark');
-    /^(([a-z])+.)+[A-Z]([a-z])+$/.test( 'a'.repeat(100) );
-    console.timeEnd('benchmark');
-< benchmark: lol.....no.
-
+// You can guess what would happen if you test the RegEx with 100 repeating characters.
+console.time('benchmark');
+/^(([a-z])+.)+[A-Z]([a-z])+$/.test( 'a'.repeat(100) );
+console.timeEnd('benchmark');
+benchmark: ops...
 ```
 
-<br>
 # Installing ReDoS
 
 As usual, install with NPM.
 ```
-npm install redos
+npm i -g git+https://git@github.com/panga/RegEx-DoS.git
 ```
 
 You can run redos on the CLI:
@@ -58,24 +52,16 @@ find . -name "*.js" -not -path "./node_modules/*" -exec redos {} \;
 
 Or to run as a node module:
 ```javascript
-var redos = require('redos');
+const redos = require('redos');
 
 redos({ content: " 'aaaa'.split(/a+b?c*/g); " }, (regexNodes) => {
-
+  regNodes.printAll();
 });
 ```
-
-<br>
-
-# Tests
-*Coming Soon?*
-
-<br><br>
 
 # Contributing
 
 See the [contribution guide](CONTRIBUTING.md) for details on how to contribute. It's probably what you expect.
-
 
 # Code of Conduct
 
@@ -86,12 +72,9 @@ our community a harassment-free experience for everyone, regardless of age, body
 size, disability, ethnicity, gender identity and expression, level of experience,
 nationality, personal appearance, race, religion, or sexual identity and orientation.
 
-
 # License
 
 The MIT License (MIT)
-
-Copyright (c) 2016 John Gracey
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

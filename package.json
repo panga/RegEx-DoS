@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jagracey/RegEx-DoS.git"
+    "url": "git+https://github.com/panga/RegEx-DoS.git"
   },
   "bin": {
     "redos": "redos.js"
@@ -22,12 +22,11 @@
     "node",
     "nodejs"
   ],
-  "author": "John Gracey",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jagracey/RegEx-DoS/issues"
+    "url": "https://github.com/panga/RegEx-DoS/issues"
   },
-  "homepage": "https://github.com/jagracey/RegEx-DoS#readme",
+  "homepage": "https://github.com/panga/RegEx-DoS#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "espree": "^7.1.0",
