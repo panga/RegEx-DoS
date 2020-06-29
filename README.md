@@ -1,5 +1,5 @@
 ![](https://raw.githubusercontent.com/jagracey/RegEx-DoS/master/resources/Banner.jpg)
-# :cop: :punch: RegEx Denial of Service (ReDos) Scanner
+# :cop: :punch: RegEx Denial of Service (ReDoS) Scanner
 ### Helping you find Regular Expressions susceptible to Denial of Service Attacks.
 *Please read the [contribution guidelines](CONTRIBUTING.md) before contributing.*
 
@@ -56,28 +56,14 @@ You can run redos on the CLI:
 find . -name "*.js" -not -path "./node_modules/*" -exec redos {} \;
 ```
 
-
 Or to run as a node module:
 ```javascript
 var redos = require('redos');
 
-// Using a Callback
-redos(" 'aaaa'.split(/a+b?c*/g); ", function(regexNodes){
-  console.log( regexNodes.results() );
-};
+redos({ content: " 'aaaa'.split(/a+b?c*/g); " }, (regexNodes) => {
 
-
-// Or Without a Callback
-redos(" 'aaaa'.split(/a+b?c*/g); ").results();
-
-
-// Or With Better Content to Parse
-const fs      = require('fs');
-const content = fs.readFileSync('./foobar.js'); // <--- Your own file Here.
-redos( content ).results();
-
+});
 ```
-
 
 <br>
 
